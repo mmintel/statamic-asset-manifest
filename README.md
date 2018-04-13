@@ -1,5 +1,5 @@
 # statamic-asset-manifest
-Searches occurences of files and replaces them
+Addon for [Statamic](https://statamic.com?rfsn=1226699.c208cc): searches occurences of files and replaces them as listed in the manifest
 
 `git submodule add git@github.com:mmintel/statamic-asset-manifest.git site/addons/AssetManifest`
 
