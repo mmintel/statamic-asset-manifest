@@ -1,0 +1,86 @@
+<?php
+
+namespace Statamic\Addons\AssetManifest;
+
+use Statamic\API\Config;
+use Statamic\API\File;
+use Statamic\API\Str;
+use Statamic\API\URL;
+use Statamic\Extend\HasParameters;
+
+trait AssetManifestTrait
+{
+    /**
+     * Provides access to methods for retrieving parameters
+     */
+    use HasParameters;
+
+    /**
+     * The name of asset revision manifest file.
+     */
+    static $manifest = 'asset-manifest.json';
+
+    /**
+     * Returns the path of given asset type.
+
+     * @param  string $type
+     * @return string
+     */
+    public function getAssetPath($type)
+    {
+        $src = $this->get('src', Config::get('theming.theme'));
+        $path = '/' . $type . '/' . Str::ensureRight($src, '.' . $type);
+        $manifest = $this->getManifest()->get($path);
+
+        return $this->themeUrl($manifest);
+    }
+
+    /**
+     * Transforms the asset directory into a relative or absolute URL for use in the front-end.
+     *
+     * @param string $path
+     * @return string
+     */
+    private function themeUrl($path)
+    {
+        if (!$this->getParam('path', false)) {
+            $url = URL::assemble(
+                Config::get('system.filesystems.themes.url'),
+                Config::get('theming.theme'),
+                $path
+            );
+        } else {
+            $url = URL::assemble($this->getParam('path'), $path);
+        }
+
+        $url = URL::prependSiteUrl(
+            $url,
+            $this->get('locale', default_locale()),
+            false
+        );
+
+        if (!$this->getBool('absolute')) {
+            $url = URL::makeRelative($url);
+        }
+
+        return $url;
+    }
+
+    /**
+     * Returns the revision manifest contained in a Collection.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function getManifest()
+    {
+        $path = root_path(
+          URL::assemble(
+              Config::get('system.filesystems.themes.root'),
+              Config::get('theming.theme'),
+              static::$manifest
+          )
+        );
+
+        return collect(json_decode(File::get($path), true));
+    }
+}

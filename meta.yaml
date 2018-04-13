@@ -1,0 +1,6 @@
+name: AssetManifest
+version: "1.0"
+description: Searches occurences of files and replaces them as listed in the manifest
+url: https://github.com/mmintel/statamic-asset-manifest
+developer: Marc Mintel
+developer_url: https://mintel.me
