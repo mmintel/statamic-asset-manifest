@@ -31,8 +31,7 @@ trait AssetManifestTrait
         $src = $this->get('src', Config::get('theming.theme'));
         $path = '/' . $type . '/' . Str::ensureRight($src, '.' . $type);
         $manifest = $this->getManifest()->get($path);
-
-        return $this->themeUrl($manifest);
+        return $this->themeUrl($manifest ? $manifest : $path);
     }
 
     /**

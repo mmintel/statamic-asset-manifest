@@ -25,6 +25,8 @@ A manifest file looks like that:
 
 This addon will not generate this manifest for you, it will just replace your assets. To generate this file you should use a build tool like Gulp, Grunt, Webpack, NPM scripts or whatever.
 
+**If no manifest file was found it will simply load the files without hashes.**
+
 ## Importing specific files
 The `asset_manifest` tag works exactly like the `theme` tag. So e.g. `{{ asset_manifest:css }}` will import `/css/default.css` and `{{ asset_manifest:css src="test" }}` will import `/css/test.css`.
 

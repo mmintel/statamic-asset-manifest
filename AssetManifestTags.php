@@ -9,7 +9,7 @@ class AssetManifestTags extends Tags
     use AssetManifestTrait;
 
     /**
-     * The {{ laravel_mix }} tag - outputs the revision manifest file as JSON.
+     * The {{ asset_manifest }} tag - outputs the revision manifest file as JSON.
      *
      * @return string
      */
@@ -19,7 +19,7 @@ class AssetManifestTags extends Tags
     }
 
     /**
-     * The {{ laravel_mix:css }} tag - outputs the URL or tag for the theme's main CSS file.
+     * The {{ asset_manifest:css }} tag - outputs the URL or tag for the theme's main CSS file.
      *
      * @return string
      */
@@ -35,7 +35,7 @@ class AssetManifestTags extends Tags
     }
 
     /**
-     * The {{ laravel_mix:js }} tag - outputs the URL or tag for the theme's main JS file.
+     * The {{ asset_manifest:js }} tag - outputs the URL or tag for the theme's main JS file.
      *
      * @return string
      */
